@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ModelBinding.Models;
 using System.Net.Mime;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
@@ -53,6 +54,47 @@ namespace ModelBinding.Controllers
         {
             string HI = $@"{{""id"":'""{ID} ""', ""name"":'"" {Rani}""'}}";
             return Content(HI, "application/json");
+        }
+
+
+		public JsonResult JsonResult()
+		{
+
+            //return Json("{\"ID\":102,\"Name\":\"Raju\" }");
+            JsonResult obj = new JsonResult($@"{{""ID"":102,""Name"":""Raju"" }}");
+			return  new JsonResult($@"{{""ID"":102,""Name"":""Raju"" }}");
+
+            //var obj = new { "ID" };
+
+            //return $@"{{""ID"":102,""Name"":""Raju"" }}";
+
+
+
+        }
+
+		[Route("HI/{RANI}/{id}")]
+        public JsonResult JsonResult2([FromRoute]string RANI, [FromRoute] int ID )
+        {
+            //anonymous object
+            var employee = new { Id = 101, Name = "Alice", Department = "IT",Gender ="Male"};
+
+
+
+
+			var employee1 = new Employee { Id = ID, Name = RANI, Gender = "Male"  };
+
+
+            JsonResult obj = new JsonResult(employee);
+
+            JsonResult obj1 = new JsonResult(employee1);
+
+
+            //var obj = new { "ID" };
+
+            return obj1;
+
+
+
         }
 
     }
