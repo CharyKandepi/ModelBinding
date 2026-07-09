@@ -101,14 +101,18 @@ namespace ModelBinding.Controllers
         }
 
 		[Route("{F_name:alpha:length(4,10)}/{L_name}/{Age:int:min(18):max(150)?}")]
-		public ActionResult GetInfo([FromRoute] Hero hero, [FromQuery] Hero Par_Hero)
+		public ActionResult GetInfo([FromRoute] Hero hero, [FromQuery] Hero Par_Hero, [FromBody] Hero Hero_data)
 		{
             StatusCodeResult statusCodeResult = new StatusCodeResult(406);
           
             if (ModelState.IsValid)
 			{
-                return Content("<html><body><h1>Hello " + hero.F_name + "" + hero.L_name + " " + Par_Hero.F_name + " " + Par_Hero.L_name + ", Welcome to Dot Net Tutorials " + hero.Age + "</h1></body></html>", "text/html");
-            }
+				// return Content("<html><body><h1>Hello " + hero.F_name + "" + hero.L_name + " " + Par_Hero.F_name + " " + Par_Hero.L_name + ", Welcome to Dot Net Tutorials " + hero.Age + "</h1></body></html>", "text/html");
+
+
+				return Content("<html lang=\"en\"><body><h1> Routing Values </h1><ul>\r\n       Hello " + hero.F_name + " \\n" + hero.L_name + " \n  </ul><h2> Querys String Values </h2><ol>\n   " + Par_Hero.F_name + " " + Par_Hero.L_name + "\n      </ol><h2> formBody  Values </h2><ol>\n    " + Hero_data.F_name + " " + Hero_data.L_name + "\n      </ol></body></html>", "text/html");
+			
+			}
 
 
 
