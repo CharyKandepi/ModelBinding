@@ -8,6 +8,7 @@ namespace ModelBinding.Controllers
 {
 	public class RamuController : Controller
 	{
+		[HttpGet]
 		public ContentResult Sitha()
 		{
 
@@ -23,13 +24,14 @@ namespace ModelBinding.Controllers
 			return contentResult;
 		}
 
-
+		[Route("Sri/{HeroName}")]
 		public ContentResult Raju() 
-		{ 
-
+		{
+			var Hero_name=Request.RouteValues["HeroName"];
+            var First_name =Request.Query["FName"];
 
 			ContentResult contentResult = new ContentResult();
-			contentResult.Content = "<html><body><h1>Hello, Welcome to Dot Net Tutorials</h1></body></html>";
+			contentResult.Content = "<html><body><h1>Hello "+Hero_name+ ""+First_name+", Welcome to Dot Net Tutorials</h1></body></html>";
 			contentResult.ContentType = "text/html";
 
 			return contentResult;
