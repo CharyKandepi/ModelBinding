@@ -99,5 +99,11 @@ namespace ModelBinding.Controllers
 
         }
 
+		public ActionResult GetInfo([FromQuery] Hero hero)
+		{
+			return Content("<html><body><h1>Hello "+hero.F_name+ ""+ hero.L_name+", Welcome to Dot Net Tutorials</h1></body></html>", "text/html");
+
+		}
+
     }
 }
