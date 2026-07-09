@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using ModelBinding.Models;
 using System.Net.Mime;
 using System.Xml.Linq;
@@ -99,11 +100,23 @@ namespace ModelBinding.Controllers
 
         }
 
-		public ActionResult GetInfo([FromQuery] Hero hero)
+		[Route("{F_name:alpha:length(4,10)}/{L_name}/{Age:int:min(18):max(150)?}")]
+		public ActionResult GetInfo([FromRoute] Hero hero, [FromQuery] Hero Par_Hero)
 		{
-			return Content("<html><body><h1>Hello "+hero.F_name+ ""+ hero.L_name+", Welcome to Dot Net Tutorials</h1></body></html>", "text/html");
+            StatusCodeResult statusCodeResult = new StatusCodeResult(406);
+          
+            if (ModelState.IsValid)
+			{
+                return Content("<html><body><h1>Hello " + hero.F_name + "" + hero.L_name + " " + Par_Hero.F_name + " " + Par_Hero.L_name + ", Welcome to Dot Net Tutorials " + hero.Age + "</h1></body></html>", "text/html");
+            }
 
-		}
+
+
+			return statusCodeResult;
+
+
+
+        }
 
     }
 }
